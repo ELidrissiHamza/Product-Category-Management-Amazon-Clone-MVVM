@@ -1,0 +1,45 @@
+﻿@page
+@model MonCatalogue.Pages.Produits.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Produit</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Produit.ProduitNom)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Produit.ProduitNom)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Produit.Prix)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Produit.Prix)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Produit.Quantite)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Produit.Quantite)
+        </dd>
+        <dt class="col-sm-2">
+            Photo
+           
+        </dt>
+        <div class="form-group">
+            <label asp-for="Produit.Image" class="control-label">Product Image</label>
+            <img src="/Images/@Model.Produit.Image" alt="Product Image" class="img-fluid" />
+        </div>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Produit?.ProduitId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

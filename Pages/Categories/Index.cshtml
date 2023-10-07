@@ -1,0 +1,118 @@
+﻿@page
+@model MonCatalogue.Pages.Categories.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        /* Style de base pour la page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Style pour le lien "Create New" */
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+            a.button:hover {
+                background-color: #0056b3;
+            }
+
+        /* Style pour le tableau */
+        .table {
+            width: 100%;
+            background-color: #fff;
+            border-collapse: collapse;
+            border-spacing: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            .table th,
+            .table td {
+                padding: 12px 15px;
+                text-align: left;
+                vertical-align: top;
+            }
+
+            .table th {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            .table tbody tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+        /* Style pour les liens Edit, Details et Delete */
+        .actions a {
+            text-decoration: none;
+            margin-right: 10px;
+            color: #007bff;
+        }
+
+            .actions a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Index</h1>
+        <p>
+            <a asp-page="Create" class="button">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Categorie[0].CategorieNom)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Categorie)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategorieNom)
+                        </td>
+                        <td class="actions">
+                            <a asp-page="./Edit" asp-route-id="@item.CategorieId">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.CategorieId">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.CategorieId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
