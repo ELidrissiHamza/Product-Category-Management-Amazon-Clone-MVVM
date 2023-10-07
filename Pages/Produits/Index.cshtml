@@ -75,43 +75,82 @@
             color: #fff;
             border: none;
         }
+        /* Container for the search bar */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+
+        /* Input field styling */
+        .search-input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        /* Search button styling */
+        .search-button {
+            padding: 10px 20px;
+            background-color: #f90;
+            color: white;
+            border: 1px solid #f90;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+            /* Search button hover effect */
+            .search-button:hover {
+                background-color: #ff9900;
+
+            }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Index</h1>
-        <p>
-            <a asp-page="Create" class="btn btn-details">Create New</a>
-        </p>
-        <div class="m-2">
-            <form method="get">
-                <div class="form-group">
-                    <label for="searchInput">Search:</label>
-                    <input type="text" class="form-control" id="searchInput" name="searchString" placeholder="Search products">
-                </div>
-                <button type="submit" class="btn btn-primary ">Search</button>
-            </form>
+   <div class="container">
+        <h1 style="color: orange; font-weight: bold; text-align: center; font-size: 36px;">Bienvenue</h1>
+
+    <p>
+        <a asp-page="Create" class="btn btn-details">Create New</a>
+    </p>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+                <form method="get">
+
+                    <div class="search-container">
+
+                        <input type="text" name="searchString" class="search-input" placeholder="Search...">
+                        <button type="submit" class="search-button">Search</button>
+                    </div>
+                </form>
         </div>
-        <div class="row">
-            @foreach (var item in Model.Produit)
-            {
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="/Images/@item.Image" alt="@item.ProduitNom" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.ProduitNom</h5>
-                            <p class="card-text">Price: @item.Prix</p>
-                            <p class="card-text">Category: @item.Categorie.CategorieNom</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a asp-page="./Details" asp-route-id="@item.ProduitId" class="btn btn-details">Details</a>
-                                <a asp-page="./Edit" asp-route-id="@item.ProduitId" class="btn btn-edit">Edit</a>
-                                <a asp-page="./Delete" asp-route-id="@item.ProduitId" class="btn btn-delete">Delete</a>
-                            </div>
+    </div>
+    <div class="row">
+        @foreach (var item in Model.Produit)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="/Images/@item.Image" alt="@item.ProduitNom" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.ProduitNom</h5>
+                        <p class="card-text">Price: @item.Prix</p>
+                        <p class="card-text">Category: @item.Categorie.CategorieNom</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a asp-page="./Details" asp-route-id="@item.ProduitId" class="btn btn-details">Details</a>
+                            <a asp-page="./Edit" asp-route-id="@item.ProduitId" class="btn btn-edit">Edit</a>
+                            <a asp-page="./Delete" asp-route-id="@item.ProduitId" class="btn btn-delete">Delete</a>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
+</div>
+
 </body>
 </html>
