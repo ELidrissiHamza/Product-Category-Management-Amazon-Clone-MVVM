@@ -1,0 +1,47 @@
+﻿@page
+@model MonCatalogue.Pages.Carts.CartModel
+@{
+    ViewData["Title"] = "Panier";
+}
+
+<h1>Panier</h1>
+<style>
+    .btn-delete {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+    }
+</style>
+
+@if (Model.Cart.Products.Count == 0)
+{
+    <p>Votre panier est vide.</p>
+}
+else
+{
+    <ul>
+       
+        <div class="row">
+            @foreach (var item in Model.Cart.Products)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="/Images/@item.Image" alt="@item.ProduitNom" class="card-img-top" style="width: 200px; height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.ProduitNom</h5>
+                            <p class="card-text">Price: @item.Prix</p>
+                          
+                            <div class="d-flex justify-content-between align-items-center">
+                                <form method="post" asp-page-handler="RemoveFromCart" asp-route-productId="@item.ProduitId">
+                                    <button type="submit" class="btn-delete">Supprimer</button>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </ul>
+}

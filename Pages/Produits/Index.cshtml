@@ -75,6 +75,12 @@
             color: #fff;
             border: none;
         }
+
+        .btn-panier {
+            background-color: gray;
+            color: #fff;
+            border: none;
+        }
         /* Container for the search bar */
         .search-container {
             display: flex;
@@ -112,7 +118,7 @@
 </head>
 <body>
    <div class="container">
-        <h1 style="color: orange; font-weight: bold; text-align: center; font-size: 36px;">Bienvenue</h1>
+        <h1 style="color: orange; font-weight: bold; text-align: center; font-size: 36px;">Bienvenue !</h1>
 
     <p>
         <a asp-page="Create" class="btn btn-details">Create New</a>
@@ -134,7 +140,7 @@
         @foreach (var item in Model.Produit)
         {
             <div class="col-md-4">
-                <div class="card">
+                    <div class="card rounded-lg">
                     <img src="/Images/@item.Image" alt="@item.ProduitNom" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">@item.ProduitNom</h5>
@@ -144,9 +150,15 @@
                             <a asp-page="./Details" asp-route-id="@item.ProduitId" class="btn btn-details">Details</a>
                             <a asp-page="./Edit" asp-route-id="@item.ProduitId" class="btn btn-edit">Edit</a>
                             <a asp-page="./Delete" asp-route-id="@item.ProduitId" class="btn btn-delete">Delete</a>
+                                <form method="post" asp-page-handler="AddToCart" asp-route-productId="@item.ProduitId">
+                                    <button type="submit" class="btn btn-panier mx-2">
+                                        <i class="fas fa-shopping-cart"></i> 
+                                    </button>
+                                </form>
                         </div>
                     </div>
                 </div>
+                   
             </div>
         }
     </div>

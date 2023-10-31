@@ -12,31 +12,47 @@ namespace MonCatalogue.Pages.Produits
     public class DetailsModel : PageModel
     {
         private readonly MonCatalogue.Model.CatalogDBContext _context;
+        private readonly CartService _cartService;
 
-        public DetailsModel(MonCatalogue.Model.CatalogDBContext context)
+        public DetailsModel(MonCatalogue.Model.CatalogDBContext context, CartService cartService)
         {
             _context = context;
+            _cartService = cartService;
         }
 
-      public Produit Produit { get; set; } = default!; 
+        public Produit Produit { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Produits == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var produit = await _context.Produits.FirstOrDefaultAsync(m => m.ProduitId == id);
-            if (produit == null)
+            Produit = await _context.Produits.FirstOrDefaultAsync(m => m.ProduitId == id);
+
+            if (Produit == null)
             {
                 return NotFound();
             }
-            else 
-            {
-                Produit = produit;
-            }
+
             return Page();
         }
+
+      /*  public IActionResult OnPostAddToCart(int productId)
+        {
+            var product = _context.Produits.FirstOrDefault(p => p.ProduitId == productId);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var cart = _cartService.GetCart();
+
+            cart.Products.Add(product);
+            _cartService.SaveCart(cart);
+
+            return RedirectToPage("/Produits/Index");
+        }*/
     }
 }

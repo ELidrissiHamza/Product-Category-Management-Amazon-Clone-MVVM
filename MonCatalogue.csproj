@@ -21,4 +21,8 @@
     <None Include="wwwroot\Images\iphone13.jpeg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
